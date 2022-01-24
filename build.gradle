@@ -1,0 +1,32 @@
+plugins {
+   // id "com.github.johnrengelman.shadow" version "5.2.0"
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'fr.redboxing.wakfu.server.WakfuServer'
+    }
+}
+
+dependencies {
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.49.Final'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.2'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+}
+
+task obfuscate(type:Exec) {
+    commandLine 'java', '-jar', 'allatori/allatori.jar', 'allatori/config.xml' 
+}
